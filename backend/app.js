@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const Book = require('./models/book');
+const stuffRouter = require('./routes/stuff')
 
 mongoose.connect(
   'mongodb+srv://ines:t_h_3DgXBMCLh_r@cluster0.7pxfpyu.mongodb.net/test'
@@ -25,39 +25,6 @@ app.get('/', (req, res) => {
     res.send('Backend fonctionne !');
 });
 
-app.post('/api/stuff', (req, res, next) => {
-    delete req.body._id 
-    const book = new Book({
-      ...req.body
-    });
-    book.save()
-    .then(() => res.status(201).json({ message: 'livre enregistré'}))
-    .catch(error => res.status(400).json({error }));
-});
-
-app.put('/api/stuff/:id', (req, res, next) => {
-  Book.updateOne({_id: req.params.id}, {...req.body, _id: req.params.id })
-  .then( () => res.status(200).json({ message: 'livre modifié'}) )
-  .catch(error => res.status(400).json({error }))
-});
-
-app.delete('/api/stuff/:id', (req, res, next) => {
-  Book.deleteOne({ _id: req.params.id })
-  .then( () => res.status(200).json({ message: 'livre supprimé'}) )
-  .catch(error => res.status(400).json({error }))
-})
-
-app.get('/api/stuff/:id', (req, res, next) => {
-  Book.findOne({ _id: req.params.id })
-  .then(book => res.status(200).json(book))
-  .catch(error => res.status(400).json({error }))
-});
-
-app.get('/api/stuff', (req, res, next) => {
-  Book.find()
-  .then(books => res.status(200).json(books))
-  .catch(error => res.status(400).json({error }))
-});
-
+app.use('/api/stuff', stuffRouter);
 
 module.exports = app;
