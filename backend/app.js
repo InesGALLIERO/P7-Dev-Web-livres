@@ -1,11 +1,11 @@
 const express = require('express');
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://jimbob:t_h_3DgXBMCLh_r@cluster0-pme76.mongodb.net/test?retryWrites=true&w=majority',
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+mongoose.connect(
+  'mongodb+srv://ines:t_h_3DgXBMCLh_r@cluster0.7pxfpyu.mongodb.net/test'
+)
+.then(() => console.log('Connexion à MongoDB réussie !'))
+.catch((error) => console.log('Connexion à MongoDB échouée !', error));
 
 const app = express();
 
