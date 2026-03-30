@@ -1,7 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const stuffRouter = require('./routes/stuff')
+const stuffRouter = require('./routes/stuff');
+const userRoutes = require('./routes/user')
 
 mongoose.connect(
   'mongodb+srv://ines:t_h_3DgXBMCLh_r@cluster0.7pxfpyu.mongodb.net/test'
@@ -26,5 +27,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/stuff', stuffRouter);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
