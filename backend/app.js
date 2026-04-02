@@ -21,12 +21,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
+app.use('/images', express.static('images'));
+
 // ───── ROUTE RACINE ─────
 app.get('/', (req, res) => {
     res.send('Backend fonctionne !');
 });
 
-app.use('/api/stuff', stuffRouter);
+app.use('/api/books', stuffRouter);
 app.use('/api/auth', userRoutes);
 
 module.exports = app;
