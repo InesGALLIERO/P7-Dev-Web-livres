@@ -1,12 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
 const stuffRouter = require('./routes/stuff');
 const userRoutes = require('./routes/user')
 
-mongoose.connect(
-  'mongodb+srv://ines:t_h_3DgXBMCLh_r@cluster0.7pxfpyu.mongodb.net/test'
-)
+mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log('Connexion à MongoDB réussie !'))
 .catch((error) => console.log('Connexion à MongoDB échouée !', error));
 
